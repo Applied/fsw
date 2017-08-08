@@ -542,7 +542,7 @@ CREATE TABLE `file_managed` (
   KEY `file_field__uri` (`uri`(191)),
   KEY `file_field__status` (`status`),
   KEY `file_field__changed` (`changed`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='The base table for file entities.';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='The base table for file entities.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -705,7 +705,7 @@ CREATE TABLE `menu_tree` (
   KEY `menu_parents` (`menu_name`,`p1`,`p2`,`p3`,`p4`,`p5`,`p6`,`p7`,`p8`,`p9`),
   KEY `menu_parent_expand_child` (`menu_name`,`expanded`,`has_children`,`parent`(16)),
   KEY `route_values` (`route_name`(32),`route_param_key`(16))
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COMMENT='Contains the menu tree hierarchy.';
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COMMENT='Contains the menu tree hierarchy.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -725,7 +725,7 @@ CREATE TABLE `node` (
   UNIQUE KEY `node_field__uuid__value` (`uuid`),
   UNIQUE KEY `node__vid` (`vid`),
   KEY `node_field__type__target_id` (`type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='The base table for node entities.';
+) ENGINE=InnoDB AUTO_INCREMENT=414 DEFAULT CHARSET=utf8mb4 COMMENT='The base table for node entities.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -774,6 +774,70 @@ CREATE TABLE `node__comment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `node__field_color`
+--
+
+DROP TABLE IF EXISTS `node__field_color`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_color` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_color_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_color_target_id` (`field_color_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_color.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node__field_grape_origin`
+--
+
+DROP TABLE IF EXISTS `node__field_grape_origin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_grape_origin` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_grape_origin_value` varchar(80) NOT NULL,
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_grape_origin.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node__field_grape_synonyms`
+--
+
+DROP TABLE IF EXISTS `node__field_grape_synonyms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_grape_synonyms` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_grape_synonyms_value` varchar(40) NOT NULL,
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_grape_synonyms.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `node__field_image`
 --
 
@@ -800,25 +864,91 @@ CREATE TABLE `node__field_image` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `node__field_tags`
+-- Table structure for table `node__field_swiss_wine_region`
 --
 
-DROP TABLE IF EXISTS `node__field_tags`;
+DROP TABLE IF EXISTS `node__field_swiss_wine_region`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `node__field_tags` (
+CREATE TABLE `node__field_swiss_wine_region` (
   `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
   `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
   `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
   `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
   `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
   `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
-  `field_tags_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  `field_swiss_wine_region_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
   PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
   KEY `bundle` (`bundle`),
   KEY `revision_id` (`revision_id`),
-  KEY `field_tags_target_id` (`field_tags_target_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_tags.';
+  KEY `field_swiss_wine_region_target_id` (`field_swiss_wine_region_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_swiss_wine_region.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node__field_swiss_wine_region_grape`
+--
+
+DROP TABLE IF EXISTS `node__field_swiss_wine_region_grape`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_swiss_wine_region_grape` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_swiss_wine_region_grape_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_swiss_wine_region_grape_target_id` (`field_swiss_wine_region_grape_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_swiss_wine_region_grape.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node__field_wine_styles_article`
+--
+
+DROP TABLE IF EXISTS `node__field_wine_styles_article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_wine_styles_article` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_wine_styles_article_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_wine_styles_article_target_id` (`field_wine_styles_article_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_wine_styles_article.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node__field_wine_styles_grape`
+--
+
+DROP TABLE IF EXISTS `node__field_wine_styles_grape`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node__field_wine_styles_grape` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_wine_styles_grape_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_wine_styles_grape_target_id` (`field_wine_styles_grape_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Data storage for node field field_wine_styles_grape.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -919,7 +1049,7 @@ CREATE TABLE `node_revision` (
   KEY `node__nid` (`nid`),
   KEY `node_field__langcode` (`langcode`),
   KEY `node_field__revision_uid__target_id` (`revision_uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='The revision table for node entities.';
+) ENGINE=InnoDB AUTO_INCREMENT=416 DEFAULT CHARSET=utf8mb4 COMMENT='The revision table for node entities.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -968,6 +1098,70 @@ CREATE TABLE `node_revision__comment` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `node_revision__field_color`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_color`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_color` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_color_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_color_target_id` (`field_color_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_color.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node_revision__field_grape_origin`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_grape_origin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_grape_origin` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_grape_origin_value` varchar(80) NOT NULL,
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_grape_origin.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node_revision__field_grape_synonyms`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_grape_synonyms`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_grape_synonyms` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_grape_synonyms_value` varchar(40) NOT NULL,
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_grape…';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `node_revision__field_image`
 --
 
@@ -994,25 +1188,91 @@ CREATE TABLE `node_revision__field_image` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `node_revision__field_tags`
+-- Table structure for table `node_revision__field_swiss_wine_region`
 --
 
-DROP TABLE IF EXISTS `node_revision__field_tags`;
+DROP TABLE IF EXISTS `node_revision__field_swiss_wine_region`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `node_revision__field_tags` (
+CREATE TABLE `node_revision__field_swiss_wine_region` (
   `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
   `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
   `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
   `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
   `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
   `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
-  `field_tags_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  `field_swiss_wine_region_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
   PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
   KEY `bundle` (`bundle`),
   KEY `revision_id` (`revision_id`),
-  KEY `field_tags_target_id` (`field_tags_target_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_tags.';
+  KEY `field_swiss_wine_region_target_id` (`field_swiss_wine_region_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_swiss_wine…';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node_revision__field_swiss_wine_region_grape`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_swiss_wine_region_grape`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_swiss_wine_region_grape` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_swiss_wine_region_grape_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_swiss_wine_region_grape_target_id` (`field_swiss_wine_region_grape_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_swiss_wine…';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node_revision__field_wine_styles_article`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_wine_styles_article`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_wine_styles_article` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_wine_styles_article_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_wine_styles_article_target_id` (`field_wine_styles_article_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_wine_styles…';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `node_revision__field_wine_styles_grape`
+--
+
+DROP TABLE IF EXISTS `node_revision__field_wine_styles_grape`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `node_revision__field_wine_styles_grape` (
+  `bundle` varchar(128) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The field instance bundle to which this row belongs, used when deleting a field instance',
+  `deleted` tinyint(4) NOT NULL DEFAULT '0' COMMENT 'A boolean indicating whether this data item has been deleted',
+  `entity_id` int(10) unsigned NOT NULL COMMENT 'The entity id this data is attached to',
+  `revision_id` int(10) unsigned NOT NULL COMMENT 'The entity revision id this data is attached to',
+  `langcode` varchar(32) CHARACTER SET ascii NOT NULL DEFAULT '' COMMENT 'The language code for this data item.',
+  `delta` int(10) unsigned NOT NULL COMMENT 'The sequence number for this data item, used for multi-value fields',
+  `field_wine_styles_grape_target_id` int(10) unsigned NOT NULL COMMENT 'The ID of the target entity.',
+  PRIMARY KEY (`entity_id`,`revision_id`,`deleted`,`delta`,`langcode`),
+  KEY `bundle` (`bundle`),
+  KEY `revision_id` (`revision_id`),
+  KEY `field_wine_styles_grape_target_id` (`field_wine_styles_grape_target_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Revision archive storage for node field field_wine_styles…';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1166,7 +1426,7 @@ CREATE TABLE `shortcut` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `shortcut_field__uuid__value` (`uuid`),
   KEY `shortcut_field__shortcut_set__target_id` (`shortcut_set`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='The base table for shortcut entities.';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='The base table for shortcut entities.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1241,7 +1501,7 @@ CREATE TABLE `taxonomy_term_data` (
   PRIMARY KEY (`tid`),
   UNIQUE KEY `taxonomy_term_field__uuid__value` (`uuid`),
   KEY `taxonomy_term_field__vid__target_id` (`vid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='The base table for taxonomy_term entities.';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COMMENT='The base table for taxonomy_term entities.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -1440,7 +1700,7 @@ CREATE TABLE `watchdog` (
   KEY `type` (`type`),
   KEY `uid` (`uid`),
   KEY `severity` (`severity`)
-) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COMMENT='Table that contains logs of all system events.';
+) ENGINE=InnoDB AUTO_INCREMENT=802 DEFAULT CHARSET=utf8mb4 COMMENT='Table that contains logs of all system events.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -1452,4 +1712,4 @@ CREATE TABLE `watchdog` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-03 13:50:29
+-- Dump completed on 2017-08-08 14:11:56
